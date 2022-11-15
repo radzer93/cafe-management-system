@@ -3,6 +3,7 @@ package org.radoslawzerek.cafemanagementsystem.JWT;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Service
+@Slf4j
 public class JwtUtil {
     private String secret = "radoslawzerek";
 
@@ -25,11 +27,12 @@ public class JwtUtil {
 
     public <T> T extractClaims(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = this.extractAllClaims(token);
+        log.info(String.valueOf(claims));
         return claimsResolver.apply(claims);
     }
 
     public Claims extractAllClaims(String token) {
-        return Jwts.parser().setSigningKey(token).parseClaimsJws(token).getBody();
+        return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
     }
 
     private Boolean isTokenExpired(String token) {
