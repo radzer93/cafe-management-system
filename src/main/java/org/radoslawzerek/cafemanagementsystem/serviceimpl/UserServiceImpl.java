@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
                 User user = userDao.findByEmailId(requestMap.get("email"));
                 if (Objects.isNull(user)) {
                     userDao.save(this.getUserFromMap(requestMap));
-                    return CafeUtils.getResponseEntity("Successfully Registered", HttpStatus.OK);
+                    return CafeUtils.getResponseEntity("Successfully Registered!", HttpStatus.OK);
                 } else {
                     return CafeUtils.getResponseEntity(CafeConstants.EMAIL_EXISTS, HttpStatus.BAD_REQUEST);
                 }
@@ -106,7 +106,7 @@ public class UserServiceImpl implements UserService {
                 if (user.isPresent()) {
                     userDao.updateStatus(requestMap.get("status"), Long.parseLong(requestMap.get("id")));
                     this.sendMailToAllAdmin(requestMap.get("status"), user.get().getEmail(), userDao.getAllAdmin());
-                    return CafeUtils.getResponseEntity("User status updated successfully", HttpStatus.OK);
+                    return CafeUtils.getResponseEntity("User status updated successfully!", HttpStatus.OK);
                 } else {
                     return CafeUtils.getResponseEntity("User id does not exist", HttpStatus.NO_CONTENT);
                 }
