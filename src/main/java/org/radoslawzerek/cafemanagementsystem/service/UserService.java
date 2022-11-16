@@ -15,4 +15,10 @@ public interface UserService {
     ResponseEntity<List<UserWrapper>> getAllUsers();
 
     ResponseEntity<String> update(Map<String, String> requestMap);
+
+    public ResponseEntity<String> checkToken();
+
+    public ResponseEntity<String> changePassword(Map<String, String> requestMap);
+
+    public ResponseEntity<String> forgotPassword(Map<String, String> requestMap);
 }

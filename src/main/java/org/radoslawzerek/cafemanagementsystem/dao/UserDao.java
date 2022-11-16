@@ -13,11 +13,13 @@ public interface UserDao extends JpaRepository<User, Long> {
 
     User findByEmailId(@Param("email") String email);
 
+    User findByEmail(String email);
+
     List<UserWrapper> getAllUser();
+
+    List<String> getAllAdmin();
 
     @Transactional
     @Modifying
     Integer updateStatus(@Param("status") String status, @Param("id") Long id);
-
-    List<String> getAllAdmin();
 }
